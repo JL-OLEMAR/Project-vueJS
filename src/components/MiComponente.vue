@@ -1,20 +1,19 @@
 <template>
   <section id="content">
+    <hr />
     <h1 class="subheader">{{ titulo }}</h1>
-    <h2>{{ texto }}</h2>
+    <h2>{{ subtitulo }}</h2>
+    <hr />
   </section>
 </template>
 
 <script>
 export default {
-  name: "HelloWorld",
-  props: {
-    msg: String,
-  },
+  name: "MiComponente",
   data() {
     return {
-      titulo: "Hola Mundo",
-      texto: "Hola Mundo desde el componente!!!",
+      titulo: "Mi Componente",
+      subtitulo: "Soy el subtitulo de mi componente",
     };
   },
 };
