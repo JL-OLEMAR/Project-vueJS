@@ -94,15 +94,52 @@ body {
     transition: 300ms all;
 }
 
+.alert-purple-provisional{
+    color: purple;
+    font-weight: bold;
+}
+
+.alert-success-provisional{
+    color: green;
+    font-weight: bold;
+}
+
+.alert-danger-provisional{
+    color: red;
+    font-weight: bold;
+}
+
+.yeargreen{
+    background: green !important;
+    color: white !important;
+    width: 111px !important;
+    text-align: center !important;
+    padding: 10px !important;
+}
+
+.yearred{
+    background: red !important;
+    color: white !important;
+    width: 111px !important;
+    text-align: center !important;
+    padding: 10px !important;
+}
+
+.leer{
+    width: 250px !important;
+    background-color: #444;
+    color: white !important;
+}
 
 #menu a:hover{
-    color: #09a330;
+    color: #078025;
 }
 
 .active{
-    border-bottom: 2px solid #084417;
-    font-weight: bold;
-  }
+    color: #078025 !important;
+    border-bottom: 1px solid #078025;
+}
+
 
 #slider{
     width: 100%;

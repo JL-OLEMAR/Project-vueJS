@@ -1,7 +1,7 @@
 <template>
   <div id="slider" class="slider-big">
     <h1>Bienvenido al Curso de Vue</h1>
-    <a href="#" class="btn-white">Ir al blog</a>
+    <router-link to="/blog" class="btn-white">Ir al blog</router-link>
   </div>
 </template>
 
