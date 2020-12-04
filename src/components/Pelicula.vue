@@ -9,7 +9,12 @@
     </div>
 
     <h2>{{ pelicula.title }}</h2>
-    <a href="#" class="leer">Leer más</a>
+    <a href="/blog" class="leer">Leer más</a>
+    <input
+      type="button"
+      value="Marcar como Favorita"
+      @click="pasarFavoritaAlPadre(pelicula)"
+    />
 
     <span
       class="date"
@@ -29,5 +34,10 @@
 export default {
   name: "Pelicula",
   props: ["pelicula"],
+  methods: {
+    pasarFavoritaAlPadre(pelicula) {
+      this.$emit("favorita", pelicula);
+    },
+  },
 };
-</script>
+</script>;

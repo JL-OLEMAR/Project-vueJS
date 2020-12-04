@@ -126,6 +126,7 @@ body {
 }
 
 .leer{
+    margin-left: 10px !important;
     width: 250px !important;
     background-color: #444;
     color: white !important;

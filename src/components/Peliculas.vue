@@ -2,12 +2,37 @@
   <div class="general">
     <div class="center">
       <section id="content">
-        <h2 class="subheader">Películas</h2>
+        <h1 class="subheader">Películas</h1>
+
+        <!--Mis Datos Computados-->
+        <div class="mis-datos" v-if="misDatos">
+          <hr />
+          <h3>Propiedades Computadas:</h3>
+          <p v-html="misDatos"></p>
+          <br />
+          <h3>Filtros Propios:</h3>
+          {{ web | mayusculas | concatenaYear("Este es el mejor año") }}
+          <hr />
+        </div>
+
+        <!--Pelicula favorita-->
+        <div class="favorita" v-if="favorita">
+          <hr />
+          La película marcada como favorita es:
+          <h3>{{ favorita.title }}</h3>
+          <hr />
+        </div>
 
         <!--Listado articulos-->
         <div id="articles">
-          <div v-for="pelicula in peliculas" v-bind:key="pelicula.title">
-            <Pelicula :pelicula="pelicula"></Pelicula>
+          <div
+            v-for="pelicula in peliculasMayuscula"
+            v-bind:key="pelicula.title"
+          >
+            <Pelicula
+              :pelicula="pelicula"
+              v-on:favorita="haLlegadoLaPeliculaFavorita"
+            ></Pelicula>
           </div>
         </div>
       </section>
@@ -27,8 +52,46 @@ export default {
     Pelicula,
     Sidebar,
   },
+  methods: {
+    haLlegadoLaPeliculaFavorita(favorita) {
+      this.favorita = favorita;
+    },
+  },
+  filters: {
+    mayusculas(value) {
+      return value.toUpperCase();
+    },
+    concatenaYear(value, message) {
+      var date = new Date();
+      return value + " " + date.getFullYear() + " " + message;
+    },
+  },
+  computed: {
+    peliculasMayuscula() {
+      var peliculasMod = this.peliculas;
+      for (var i = 0; i < this.peliculas.length; i++) {
+        peliculasMod[i].title = peliculasMod[i].title.toUpperCase();
+      }
+      return peliculasMod;
+    },
+    misDatos() {
+      return (
+        "<strong>Nombre Completo:</strong> " +
+        this.nombre +
+        " " +
+        this.apellidos +
+        "<br/>" +
+        "<strong>Sitio web:</strong> " +
+        this.web
+      );
+    },
+  },
   data() {
     return {
+      nombre: "José",
+      apellidos: "Olemar",
+      web: "https://github.com/JL-OLEMAR",
+      favorita: null,
       peliculas: [
         {
           title: "Batman vs Superman",
