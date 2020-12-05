@@ -2,7 +2,9 @@
   <aside id="sidebar">
     <div id="nav-blog" class="sidebar-item">
       <h3>Puedes hacer esto</h3>
-      <a href="#" class="btn btn-success">Crear artículo</a>
+      <router-link to="/crear-articulo" class="btn btn-success"
+        >Crear artículo</router-link
+      >
     </div>
 
     <div id="search" class="sidebar-item">
@@ -10,12 +12,7 @@
       <p>Encuentra el artículo que buscas</p>
       <form @submit.prevent="goSearch">
         <input type="text" name="search" v-model="searchString" />
-        <input
-          type="submit"
-          name="submit"
-          value="Buscar"
-          class="btn btn-primary"
-        />
+        <input type="submit" name="submit" value="Buscar" class="btn btn-primary" />
       </form>
     </div>
   </aside>
