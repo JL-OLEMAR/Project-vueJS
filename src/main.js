@@ -14,6 +14,8 @@ import Blog from './components/Blog.vue';
 import Formulario from './components/Formulario.vue';
 import Pagina from './components/Pagina.vue';
 import Peliculas from './components/Peliculas.vue';
+import Search from './components/Search.vue';
+import Redirect from './components/Redirect.vue';
 import ErrorComponent from './components/ErrorComponent.vue';
 
 Vue.config.productionTip = false
@@ -31,6 +33,8 @@ const routes = [
   { path: '/pagina/:id?', name: 'pagina', component: Pagina },
   { path: '/peliculas', name: 'peliculas', component: Peliculas },
   { path: '/ultimos-articulos', component: LastArticles },
+  { path: '/buscador/:searchString', component: Search },
+  { path: '/redirect/:searchString', component: Redirect },
   { path: '/mi-componente', component: MiComponente },
   { path: '/hola-mundo', component: HelloWorld },
   { path: '/', component: LastArticles },
