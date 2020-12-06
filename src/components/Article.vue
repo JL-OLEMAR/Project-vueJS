@@ -22,9 +22,7 @@
           <router-link :to="'/editar/' + article._id" class="btn btn-warning"
             >Editar</router-link
           >
-          <router-link :to="'/eliminar/' + article._id" class="btn btn-danger"
-            >Eliminar</router-link
-          >
+          <a @click="deleteArticle(article._id)" class="btn btn-danger">Eliminar</a>
         </article>
       </section>
       <Sidebar></Sidebar>
@@ -37,6 +35,7 @@
 import Sidebar from "./Sidebar.vue";
 import Global from "../Global";
 import axios from "axios";
+import swal from "sweetalert";
 
 export default {
   name: "Article",
@@ -58,6 +57,30 @@ export default {
       axios.get(this.url + "article/" + articleId).then((res) => {
         if (res.data.status == "success") {
           this.article = res.data.article;
+        }
+      });
+    },
+    deleteArticle(articleId) {
+      swal({
+        title: "¿Estas seguro de querer eliminar el artículo?",
+        text: "Si lo eliminas, no podras recuperarlo!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          axios.delete(this.url + "article/" + articleId).then((response) => {
+            if (response.data.status == "success") {
+              swal(
+                "Artículo eliminado",
+                "El artículo se ha eliminado, definitivamente",
+                "success"
+              );
+              this.$router.push("/blog");
+            }
+          });
+        } else {
+          swal("Uff casi!!! No lo has eliminado, tranquilo.");
         }
       });
     },
