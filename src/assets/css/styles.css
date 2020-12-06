@@ -279,6 +279,10 @@ body {
     overflow: hidden;
 }
 
+.image-small{
+    width: 100px;
+}
+
 .mid-form{
     width: 50%;
     margin: 0px auto;

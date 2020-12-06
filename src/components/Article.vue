@@ -19,6 +19,12 @@
           </p>
 
           <div class="clearfix"></div>
+          <router-link :to="'/editar/' + article._id" class="btn btn-warning"
+            >Editar</router-link
+          >
+          <router-link :to="'/eliminar/' + article._id" class="btn btn-danger"
+            >Eliminar</router-link
+          >
         </article>
       </section>
       <Sidebar></Sidebar>

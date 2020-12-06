@@ -9,7 +9,7 @@ import { required } from "vuelidate/lib/validators";
 import swal from "sweetalert";
 
 export default {
-  name: "CreateArticle",
+  name: "EditArticle",
   components: {
     Sidebar,
   },
@@ -19,11 +19,12 @@ export default {
       file: "",
       article: new Article("", "", null, ""),
       submitted: false,
-      isEdit: false,
+      isEdit: true,
     };
   },
   mounted() {
-    // console.log(this.article);
+    var articleId = this.$route.params.id;
+    this.getArticle(articleId);
   },
   validations: {
     article: {
@@ -42,12 +43,14 @@ export default {
     },
     save() {
       this.submitted = true;
+      var articleId = this.$route.params.id;
       this.$v.$touch();
+
       if (this.$v.$invalid) {
         return false;
       } else {
         axios
-          .post(this.url + "save", this.article)
+          .put(this.url + "article/" + articleId, this.article)
           .then((response) => {
             if (response.data.status == "success") {
               // Subida de archivo
@@ -55,24 +58,24 @@ export default {
                 const formData = new FormData();
                 formData.append("file0", this.file, this.file.name);
 
-                var articleId = response.data.article._id;
+                var articleId = response.data.articleUpdated._id;
                 axios
                   .post(this.url + "upload-image/" + articleId, formData)
                   .then((response) => {
                     if (response.data.article) {
                       swal(
-                        "Artículo creado",
-                        "El artículo se ha creado correctamente :)",
+                        "Artículo actualizado",
+                        "El artículo se ha actualizado correctamente :)",
                         "success"
                       );
 
                       this.article = response.data.article;
-                      this.$router.push("/blog");
+                      this.$router.push("/articulo/" + this.article._id);
                     } else {
                       //  Mostrar alerta de error
                       swal(
                         "Artículo fallido",
-                        "El artículo NO se ha guardado",
+                        "El artículo NO se ha actualizado",
                         "error"
                       );
                     }
@@ -82,12 +85,12 @@ export default {
                   });
               } else {
                 swal(
-                  "Artículo creado",
-                  "El artículo se ha creado correctamente :)",
+                  "Artículo actualizado",
+                  "El artículo se ha actualizado correctamente :)",
                   "success"
                 );
-                this.article = response.data.article;
-                this.$router.push("/blog");
+                this.article = response.data.articleUpdated;
+                this.$router.push("/articulo/" + this.article._id);
               }
             }
           })
@@ -95,6 +98,13 @@ export default {
             console.log(error);
           });
       }
+    },
+    getArticle(articleId) {
+      axios.get(this.url + "article/" + articleId).then((res) => {
+        if (res.data.status == "success") {
+          this.article = res.data.article;
+        }
+      });
     },
   },
 };
